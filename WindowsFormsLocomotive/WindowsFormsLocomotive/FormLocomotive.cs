@@ -17,7 +17,10 @@ namespace WindowsFormsLocomotive
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// Метод отрисовки поезд
+        /// </summary>
+        /// 
         private void Draw()
         {
             Bitmap bmp = new Bitmap(pictureBoxLocomotive.Width, pictureBoxLocomotive.Height);
@@ -26,6 +29,12 @@ namespace WindowsFormsLocomotive
             pictureBoxLocomotive.Image = bmp;
         }
 
+
+        /// Обработка нажатия кнопки "Создать автомобиль"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// 
         private void ButtonCreate_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
@@ -43,8 +52,18 @@ namespace WindowsFormsLocomotive
            pictureBoxLocomotive.Height);
             Draw();
         }
+        /// <summary>
+        /// Обработка нажатия кнопки "Создать гоночный автомобиль"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// Обработка нажатия кнопок управления
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonMove_Click(object sender, EventArgs e)
         {
+            //получаем имя кнопки
             string name = (sender as Button).Name;
             switch (name)
             {

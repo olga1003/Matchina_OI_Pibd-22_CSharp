@@ -9,8 +9,20 @@ namespace WindowsFormsLocomotive
 {
     class LocoTrain : Train
     {
+        /// <summary>
+        /// Ширина отрисовки автомобиля
+        /// </summary>
         protected const int locoWidth = 100;
+        /// <summary>
+        /// Ширина отрисовки автомобиля
+        /// </summary>
         protected const int locoHeight = 60;
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="maxSpeed">Максимальная скорость</param>
+        /// <param name="weight">Вес автомобиля</param>
+        /// <param name="mainColor">Основной цвет кузова</param>
         public LocoTrain(int maxSpeed, float weight, Color mainColor)
         {
             MaxSpeed = maxSpeed;
@@ -60,11 +72,17 @@ namespace WindowsFormsLocomotive
             g.FillRectangle(spoiler, _startPosX + 60, _startPosY + 30, 7, 10);
 
             g.FillRectangle(spoiler, _startPosX + 20, _startPosY + 55, 70, 7);
+
+            //  g.FillRectangle(spoiler, _startPosX + 22, _startPosY + 70, 100, 18);
             Brush br = new SolidBrush(MainColor);
             g.FillRectangle(br, _startPosX + 20, _startPosY + 40, 70, 15);
             g.FillRectangle(br, _startPosX + 35, _startPosY + 20, 20, 20);
+
+
             Brush wh = new SolidBrush(Color.White);
             g.FillRectangle(wh, _startPosX + 36, _startPosY + 22, 18, 18);
+
+
             Brush gr = new SolidBrush(Color.Brown);
             g.FillEllipse(gr, _startPosX + 27, _startPosY + 50, 15, 15);
             g.FillEllipse(gr, _startPosX + 48, _startPosY + 50, 15, 15);
