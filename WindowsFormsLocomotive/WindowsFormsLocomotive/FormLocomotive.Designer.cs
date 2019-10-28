@@ -26,6 +26,7 @@
             this.buttonDown = new System.Windows.Forms.Button();
             this.buttonRight = new System.Windows.Forms.Button();
             this.buttonLeft = new System.Windows.Forms.Button();
+            this.ButtonCreateLocoTrain = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLocomotive)).BeginInit();
             this.SuspendLayout();
             // 
@@ -96,11 +97,22 @@
             this.buttonLeft.UseVisualStyleBackColor = true;
             this.buttonLeft.Click += new System.EventHandler(this.buttonMove_Click);
             // 
+            // ButtonCreateLocoTrain
+            // 
+            this.ButtonCreateLocoTrain.Location = new System.Drawing.Point(282, 27);
+            this.ButtonCreateLocoTrain.Name = "ButtonCreateLocoTrain";
+            this.ButtonCreateLocoTrain.Size = new System.Drawing.Size(255, 31);
+            this.ButtonCreateLocoTrain.TabIndex = 7;
+            this.ButtonCreateLocoTrain.Text = "Cоздать тепловоз";
+            this.ButtonCreateLocoTrain.UseVisualStyleBackColor = true;
+            this.ButtonCreateLocoTrain.Click += new System.EventHandler(this.ButtonCreateLocoTrain_Click);
+            // 
             // FormLocomotive
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(882, 453);
+            this.Controls.Add(this.ButtonCreateLocoTrain);
             this.Controls.Add(this.buttonLeft);
             this.Controls.Add(this.buttonRight);
             this.Controls.Add(this.buttonDown);
@@ -123,6 +135,7 @@
         private System.Windows.Forms.Button buttonDown;
         private System.Windows.Forms.Button buttonRight;
         private System.Windows.Forms.Button buttonLeft;
+        private System.Windows.Forms.Button ButtonCreateLocoTrain;
     }
 }
 
