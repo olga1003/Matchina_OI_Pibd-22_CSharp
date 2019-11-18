@@ -17,14 +17,14 @@ namespace WindowsFormsLocomotive
         public FormTrainConfig()
         {
             InitializeComponent();
-            panelBlack.MouseDown += panelColor_MouseDown;
-            panelOrange.MouseDown += panelColor_MouseDown;
-            panelGray.MouseDown += panelColor_MouseDown;
-            panelGreen.MouseDown += panelColor_MouseDown;
-            panelRed.MouseDown += panelColor_MouseDown;
-            panelWhite.MouseDown += panelColor_MouseDown;
-            panelYellow.MouseDown += panelColor_MouseDown;
-            panelBlue.MouseDown += panelColor_MouseDown;
+            panelBlack.MouseDown += PanelColor_MouseDown;
+            panelOrange.MouseDown += PanelColor_MouseDown;
+            panelGray.MouseDown += PanelColor_MouseDown;
+            panelGreen.MouseDown += PanelColor_MouseDown;
+            panelRed.MouseDown += PanelColor_MouseDown;
+            panelWhite.MouseDown += PanelColor_MouseDown;
+            panelYellow.MouseDown += PanelColor_MouseDown;
+            panelBlue.MouseDown += PanelColor_MouseDown;
 
             buttonCancel.Click += (object sender, EventArgs e) => { Close(); };
         }
@@ -50,17 +50,17 @@ namespace WindowsFormsLocomotive
                 eventAddTrain += ev;
             }
         }
-        private void labelTrain_MouseDown(object sender, MouseEventArgs e)
+        private void LabelTrain_MouseDown(object sender, MouseEventArgs e)
         {
             labelTrain.DoDragDrop(labelTrain.Text, DragDropEffects.Move |
 DragDropEffects.Copy);
         }
-        private void labelLocomotive_MouseDown(object sender, MouseEventArgs e)
+        private void LabelLocomotive_MouseDown(object sender, MouseEventArgs e)
         {
             labelLocomotive.DoDragDrop(labelLocomotive.Text, DragDropEffects.Move |
             DragDropEffects.Copy);
         }
-        private void panelTrain_DragEnter(object sender, DragEventArgs e)
+        private void PanelTrain_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.Text))
             {
@@ -85,12 +85,12 @@ DragDropEffects.Copy);
             }
             DrawTrain();
         }
-        private void panelColor_MouseDown(object sender, MouseEventArgs e)
+        private void PanelColor_MouseDown(object sender, MouseEventArgs e)
         {
             (sender as Control).DoDragDrop((sender as Control).BackColor,
 DragDropEffects.Move | DragDropEffects.Copy);
-        }    
-        private void labelMainColor_DragEnter(object sender, DragEventArgs e)
+        }
+        private void LabelMainColor_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(typeof(Color)))
             {
@@ -101,7 +101,7 @@ DragDropEffects.Move | DragDropEffects.Copy);
                 e.Effect = DragDropEffects.None;
             }
         }
-        private void labelMainColor_DragDrop(object sender, DragEventArgs e)
+        private void LabelMainColor_DragDrop(object sender, DragEventArgs e)
         {
             if (transport != null)
             {
@@ -109,7 +109,7 @@ DragDropEffects.Move | DragDropEffects.Copy);
                 DrawTrain();
             }
         }
-        private void labelDopColor_DragDrop(object sender, DragEventArgs e)
+        private void LabelDopColor_DragDrop(object sender, DragEventArgs e)
         {
             if (transport != null)
             {
@@ -121,7 +121,8 @@ DragDropEffects.Move | DragDropEffects.Copy);
                 }
             }
         }
-        private void ButtonAdd_Click_1(object sender, EventArgs e)
+
+        private void ButtonAdd_Click(object sender, EventArgs e)
         {
             eventAddTrain?.Invoke(transport);
             Close();

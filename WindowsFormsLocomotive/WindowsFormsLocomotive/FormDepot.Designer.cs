@@ -34,9 +34,8 @@
             this.pictureBoxTakeTrain = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonTakeTrain = new System.Windows.Forms.Button();
-            this.buttonSetLocoTrain = new System.Windows.Forms.Button();
-            this.buttonSetTrain = new System.Windows.Forms.Button();
             this.listBoxLevels = new System.Windows.Forms.ListBox();
+            this.buttonSetTrain = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDepot)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTakeTrain)).BeginInit();
@@ -103,28 +102,6 @@
             this.buttonTakeTrain.UseVisualStyleBackColor = true;
             this.buttonTakeTrain.Click += new System.EventHandler(this.ButtonTakeTrain_Click);
             // 
-            // buttonSetLocoTrain
-            // 
-            this.buttonSetLocoTrain.Location = new System.Drawing.Point(675, 74);
-            this.buttonSetLocoTrain.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonSetLocoTrain.Name = "buttonSetLocoTrain";
-            this.buttonSetLocoTrain.Size = new System.Drawing.Size(157, 46);
-            this.buttonSetLocoTrain.TabIndex = 5;
-            this.buttonSetLocoTrain.Text = "Поставить тепловоз";
-            this.buttonSetLocoTrain.UseVisualStyleBackColor = true;
-            this.buttonSetLocoTrain.Click += new System.EventHandler(this.ButtonSetLocoTrain_Click);
-            // 
-            // buttonSetTrain
-            // 
-            this.buttonSetTrain.Location = new System.Drawing.Point(675, 29);
-            this.buttonSetTrain.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonSetTrain.Name = "buttonSetTrain";
-            this.buttonSetTrain.Size = new System.Drawing.Size(157, 31);
-            this.buttonSetTrain.TabIndex = 6;
-            this.buttonSetTrain.Text = "Поставить поезд";
-            this.buttonSetTrain.UseVisualStyleBackColor = true;
-            this.buttonSetTrain.Click += new System.EventHandler(this.ButtonSetTrain_Click);
-            // 
             // listBoxLevels
             // 
             this.listBoxLevels.FormattingEnabled = true;
@@ -135,14 +112,23 @@
             this.listBoxLevels.TabIndex = 4;
             this.listBoxLevels.SelectedIndexChanged += new System.EventHandler(this.ListBoxLevels_SelectedIndexChanged);
             // 
+            // buttonSetTrain
+            // 
+            this.buttonSetTrain.Location = new System.Drawing.Point(680, 39);
+            this.buttonSetTrain.Name = "buttonSetTrain";
+            this.buttonSetTrain.Size = new System.Drawing.Size(139, 68);
+            this.buttonSetTrain.TabIndex = 6;
+            this.buttonSetTrain.Text = "Заказать поезд";
+            this.buttonSetTrain.UseVisualStyleBackColor = true;
+            this.buttonSetTrain.Click += new System.EventHandler(this.ButtonSetTrain_Click_1);
+            // 
             // FormDepot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(852, 450);
-            this.Controls.Add(this.listBoxLevels);
             this.Controls.Add(this.buttonSetTrain);
-            this.Controls.Add(this.buttonSetLocoTrain);
+            this.Controls.Add(this.listBoxLevels);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pictureBoxDepot);
             this.Name = "FormDepot";
@@ -163,8 +149,7 @@
         private System.Windows.Forms.PictureBox pictureBoxTakeTrain;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonTakeTrain;
-        private System.Windows.Forms.Button buttonSetLocoTrain;
-        private System.Windows.Forms.Button buttonSetTrain;
         private System.Windows.Forms.ListBox listBoxLevels;
+        private System.Windows.Forms.Button buttonSetTrain;
     }
 }

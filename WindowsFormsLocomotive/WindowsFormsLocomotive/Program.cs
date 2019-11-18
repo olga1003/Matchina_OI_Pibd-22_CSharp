@@ -6,6 +6,7 @@ using System.Windows.Forms;
 
 namespace WindowsFormsLocomotive
 {
+    public delegate void trainDelegate(ITransport transport);
     static class Program
     {
         [STAThread]
