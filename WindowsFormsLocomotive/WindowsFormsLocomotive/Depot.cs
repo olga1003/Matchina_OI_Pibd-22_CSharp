@@ -8,7 +8,6 @@ namespace WindowsFormsLocomotive
 {
     public class Depot<T> where T : class, ITransport
     {
-
         private Dictionary<int, T> _places;
         private int _maxCount;
         private int PictureWidth { get; set; }
