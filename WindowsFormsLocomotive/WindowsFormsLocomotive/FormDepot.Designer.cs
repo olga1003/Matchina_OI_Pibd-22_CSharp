@@ -36,6 +36,7 @@
             this.buttonTakeTrain = new System.Windows.Forms.Button();
             this.buttonSetLocoTrain = new System.Windows.Forms.Button();
             this.buttonSetTrain = new System.Windows.Forms.Button();
+            this.listBoxLevels = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDepot)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTakeTrain)).BeginInit();
@@ -124,11 +125,22 @@
             this.buttonSetTrain.UseVisualStyleBackColor = true;
             this.buttonSetTrain.Click += new System.EventHandler(this.ButtonSetTrain_Click);
             // 
+            // listBoxLevels
+            // 
+            this.listBoxLevels.FormattingEnabled = true;
+            this.listBoxLevels.ItemHeight = 16;
+            this.listBoxLevels.Location = new System.Drawing.Point(675, 125);
+            this.listBoxLevels.Name = "listBoxLevels";
+            this.listBoxLevels.Size = new System.Drawing.Size(157, 84);
+            this.listBoxLevels.TabIndex = 4;
+            this.listBoxLevels.SelectedIndexChanged += new System.EventHandler(this.ListBoxLevels_SelectedIndexChanged);
+            // 
             // FormDepot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(852, 450);
+            this.Controls.Add(this.listBoxLevels);
             this.Controls.Add(this.buttonSetTrain);
             this.Controls.Add(this.buttonSetLocoTrain);
             this.Controls.Add(this.groupBox1);
@@ -153,5 +165,6 @@
         private System.Windows.Forms.Button buttonTakeTrain;
         private System.Windows.Forms.Button buttonSetLocoTrain;
         private System.Windows.Forms.Button buttonSetTrain;
+        private System.Windows.Forms.ListBox listBoxLevels;
     }
 }
