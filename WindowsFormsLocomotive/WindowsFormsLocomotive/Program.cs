@@ -13,7 +13,7 @@ namespace WindowsFormsLocomotive
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormLocomotive());
+            Application.Run(new FormDepot());
         }
     }
 }
