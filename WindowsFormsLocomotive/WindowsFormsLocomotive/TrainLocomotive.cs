@@ -23,6 +23,20 @@ bool steam, bool coal, bool pipe) :
             Pipe = pipe;
             Random rnd = new Random();
         }
+        public TrainLocomotive(string info) : base(info)
+        {
+            string[] strs = info.Split(';');
+            if (strs.Length == 6)
+            {
+                MaxSpeed = Convert.ToInt32(strs[0]);
+                Weight = Convert.ToInt32(strs[1]);
+                MainColor = Color.FromName(strs[2]);
+                DopColor = Color.FromName(strs[3]);
+                Coal = Convert.ToBoolean(strs[4]);
+                Pipe = Convert.ToBoolean(strs[5]);
+            }
+        }
+
         public override void DrawTrain(Graphics g)
         {
             Brush dopBrush = new SolidBrush(DopColor);
@@ -49,5 +63,11 @@ bool steam, bool coal, bool pipe) :
         {
             DopColor = color;
         }
+
+        public override string ToString()
+        {
+            return base.ToString() + ";" + DopColor.Name + ";" + Coal + ";" +
+           Steam;
+        }
     }
 }
