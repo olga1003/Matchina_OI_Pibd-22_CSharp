@@ -60,7 +60,7 @@ namespace WindowsFormsLocomotive
                     break;
             }
             Draw();
-        }    
+        }
     }
 }
 

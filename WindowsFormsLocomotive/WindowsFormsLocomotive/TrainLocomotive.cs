@@ -25,7 +25,6 @@ bool steam, bool coal, bool pipe) :
         }
         public override void DrawTrain(Graphics g)
         {
-            Pen pen = new Pen(Color.Black);
             Brush dopBrush = new SolidBrush(DopColor);
             if (Coal)
             {
@@ -45,6 +44,10 @@ bool steam, bool coal, bool pipe) :
 
             }
             base.DrawTrain(g);
+        }
+        public void SetDopColor(Color color)
+        {
+            DopColor = color;
         }
     }
 }

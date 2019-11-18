@@ -13,6 +13,9 @@ namespace WindowsFormsLocomotive
     public partial class FormDepot : Form
     {
         MultiLevelParking depot;
+
+        FormTrainConfig form;
+
         private const int countLevel = 5;
         public FormDepot()
         {
@@ -35,47 +38,6 @@ namespace WindowsFormsLocomotive
                 Graphics gr = Graphics.FromImage(bmp);
                 depot[listBoxLevels.SelectedIndex].Draw(gr);
                 pictureBoxDepot.Image = bmp;
-            }
-        }
-        private void ButtonSetTrain_Click(object sender, EventArgs e)
-        {
-            if (listBoxLevels.SelectedIndex > -1)
-            {
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    var locomotive = new LocoTrain(100, 1000, dialog.Color);
-                    int place = depot[listBoxLevels.SelectedIndex] + locomotive;
-                    if (place == -1)
-                    {
-                        MessageBox.Show("Нет свободных мест", "Ошибка",
-                       MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    Draw();
-                }
-            }
-        }
-        private void ButtonSetLocoTrain_Click(object sender, EventArgs e)
-        {
-            if (listBoxLevels.SelectedIndex > -1)
-            {
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    ColorDialog dialogDop = new ColorDialog();
-                    if (dialogDop.ShowDialog() == DialogResult.OK)
-                    {
-                        var locomotive = new TrainLocomotive(100, 1000, dialog.Color,
-                       dialogDop.Color, true, true, true);
-                        int place = depot[listBoxLevels.SelectedIndex] + locomotive;
-                        if (place == -1)
-                        {
-                            MessageBox.Show("Нет свободных мест", "Ошибка",
-                           MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        Draw();
-                    }
-                }
             }
         }
         private void ButtonTakeTrain_Click(object sender, EventArgs e)
@@ -109,6 +71,29 @@ namespace WindowsFormsLocomotive
         private void ListBoxLevels_SelectedIndexChanged(object sender, EventArgs e)
         {
             Draw();
+        }
+
+        private void AddTrain(ITransport transport)
+        {
+            if (transport != null && listBoxLevels.SelectedIndex > -1)
+            {
+                int place = depot[listBoxLevels.SelectedIndex] + transport;
+                if (place > -1)
+                {
+                    Draw();
+                }
+                else
+                {
+                    MessageBox.Show("Поезд не удалось поставить");
+                }
+            }
+        }
+
+        private void ButtonSetTrain_Click_1(object sender, EventArgs e)
+        {
+            form = new FormTrainConfig();
+            form.AddEvent(AddTrain);
+            form.Show();
         }
     }
 }
