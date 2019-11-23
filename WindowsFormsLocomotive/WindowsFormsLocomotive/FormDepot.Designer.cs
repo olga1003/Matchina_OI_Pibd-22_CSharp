@@ -53,7 +53,7 @@
             this.pictureBoxDepot.Location = new System.Drawing.Point(12, 39);
             this.pictureBoxDepot.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBoxDepot.Name = "pictureBoxDepot";
-            this.pictureBoxDepot.Size = new System.Drawing.Size(645, 397);
+            this.pictureBoxDepot.Size = new System.Drawing.Size(645, 529);
             this.pictureBoxDepot.TabIndex = 1;
             this.pictureBoxDepot.TabStop = false;
             // 
@@ -142,14 +142,14 @@
             // сохранитьToolStripMenuItem
             // 
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(166, 26);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.СохранитьToolStripMenuItem_Click);
             // 
             // загрузитьToolStripMenuItem
             // 
             this.загрузитьToolStripMenuItem.Name = "загрузитьToolStripMenuItem";
-            this.загрузитьToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.загрузитьToolStripMenuItem.Size = new System.Drawing.Size(166, 26);
             this.загрузитьToolStripMenuItem.Text = "Загрузить";
             this.загрузитьToolStripMenuItem.Click += new System.EventHandler(this.ЗагрузитьToolStripMenuItem_Click);
             // 
@@ -176,7 +176,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(852, 450);
+            this.ClientSize = new System.Drawing.Size(852, 579);
             this.Controls.Add(this.buttonSetTrain);
             this.Controls.Add(this.listBoxLevels);
             this.Controls.Add(this.groupBox1);

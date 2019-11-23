@@ -21,6 +21,8 @@ namespace WindowsFormsLocomotive
                pictureHeight));
             }
         }
+
+
         public Depot<ITransport> this[int ind]
         {
             get
@@ -32,7 +34,7 @@ namespace WindowsFormsLocomotive
                 return null;
             }
         }
-        public bool SaveData(string filename)
+        public void SaveData(string filename)
         {
             if (File.Exists(filename))
             {
@@ -48,10 +50,9 @@ namespace WindowsFormsLocomotive
                     fs.WriteLine("Level");
                     for (int i = 0; i < countPlaces; i++)
                     {
-                        var car = level[i];
-                        if (car != null)
+                        try
                         {
-                            //если место не пустое
+                            var car = level[i];
                             //Записываем тип мшаины
                             if (car.GetType().Name == "LocoTrain")
                             {
@@ -64,10 +65,10 @@ namespace WindowsFormsLocomotive
                             //Записываемые параметры
                             fs.WriteLine(car);
                         }
+                        finally { }
                     }
                 }
             }
-            return true;
         }
         private void WriteToFile(string text, FileStream stream)
         {
@@ -75,11 +76,11 @@ namespace WindowsFormsLocomotive
             stream.Write(info, 0, info.Length);
         }
 
-        public bool LoadData(string filename)
+        public void LoadData(string filename)
         {
             if (!File.Exists(filename))
             {
-                return false;
+                throw new FileNotFoundException();
             }
 
             using (StreamReader fs = new StreamReader(filename, System.Text.Encoding.Default))
@@ -102,7 +103,7 @@ namespace WindowsFormsLocomotive
                 else
                 {
                     //если нет такой записи, то это не те данные
-                    return false;
+                    throw new Exception("Неверный формат файла");
                 }
                 while (true)
                 {
@@ -132,7 +133,6 @@ pictureWidth, pictureHeight));
                     }
                     parkingStages[counter][Convert.ToInt32(line.Split(':')[0])] = transport;
                 }
-                return true;
             }
         }
 
