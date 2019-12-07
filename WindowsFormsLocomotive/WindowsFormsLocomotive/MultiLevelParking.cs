@@ -70,12 +70,6 @@ namespace WindowsFormsLocomotive
                 }
             }
         }
-        private void WriteToFile(string text, FileStream stream)
-        {
-            byte[] info = new UTF8Encoding(true).GetBytes(text);
-            stream.Write(info, 0, info.Length);
-        }
-
         public void LoadData(string filename)
         {
             if (!File.Exists(filename))
