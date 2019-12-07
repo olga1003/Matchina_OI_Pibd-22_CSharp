@@ -17,6 +17,17 @@ namespace WindowsFormsLocomotive
             Weight = weight;
             MainColor = mainColor;
         }
+
+        public LocoTrain(string info)
+        {
+            string[] strs = info.Split(';');
+            if (strs.Length == 3)
+            {
+                MaxSpeed = Convert.ToInt32(strs[0]);
+                Weight = Convert.ToInt32(strs[1]);
+                MainColor = Color.FromName(strs[2]);
+            }
+        }
         public override void MoveTransport(Direction direction)
         {
             float step = MaxSpeed * 100 / Weight;
@@ -66,6 +77,11 @@ namespace WindowsFormsLocomotive
             g.FillEllipse(gr, _startPosX + 27, _startPosY + 50, 15, 15);
             g.FillEllipse(gr, _startPosX + 48, _startPosY + 50, 15, 15);
             g.FillEllipse(gr, _startPosX + 68, _startPosY + 50, 15, 15);
+        }
+
+        public override string ToString()
+        {
+            return MaxSpeed + ";" + Weight + ";" + MainColor.Name;
         }
     }
 }

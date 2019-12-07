@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -73,6 +74,13 @@ namespace WindowsFormsLocomotive
             Draw();
         }
 
+        private void ButtonSetTrain_Click_1(object sender, EventArgs e)
+        {
+            form = new FormTrainConfig();
+            form.AddEvent(AddTrain);
+            form.Show();
+        }
+
         private void AddTrain(ITransport transport)
         {
             if (transport != null && listBoxLevels.SelectedIndex > -1)
@@ -89,11 +97,39 @@ namespace WindowsFormsLocomotive
             }
         }
 
-        private void ButtonSetTrain_Click_1(object sender, EventArgs e)
+        private void СохранитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            form = new FormTrainConfig();
-            form.AddEvent(AddTrain);
-            form.Show();
+            if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                if (depot.SaveData(saveFileDialog.FileName))
+                {
+                    MessageBox.Show("Сохранение прошло успешно", "Результат",
+                   MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Не сохранилось", "Результат",
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void ЗагрузитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                if (depot.LoadData(openFileDialog.FileName))
+                {
+                    MessageBox.Show("Загрузили", "Результат", MessageBoxButtons.OK,
+     MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Не загрузили", "Результат", MessageBoxButtons.OK,
+                   MessageBoxIcon.Error);
+                }
+                Draw();
+            }
         }
     }
 }

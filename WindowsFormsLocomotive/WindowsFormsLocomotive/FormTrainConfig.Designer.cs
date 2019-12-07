@@ -117,7 +117,7 @@
             // 
             // panelGreen
             // 
-            this.panelGreen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.panelGreen.BackColor = System.Drawing.Color.Green;
             this.panelGreen.Location = new System.Drawing.Point(16, 88);
             this.panelGreen.Name = "panelGreen";
             this.panelGreen.Size = new System.Drawing.Size(52, 50);
