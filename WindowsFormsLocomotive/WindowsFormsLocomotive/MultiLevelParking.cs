@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
+using System.Text;
+
 
 namespace WindowsFormsLocomotive
 {
@@ -9,12 +10,14 @@ namespace WindowsFormsLocomotive
     {
         List<Depot<ITransport>> parkingStages;
         private const int countPlaces = 20;
-        private int pictureWidth;        private int pictureHeight;
+        private int pictureWidth;
+        private int pictureHeight;
         public MultiLevelParking(int countStages, int pictureWidth, int pictureHeight)
         {
             parkingStages = new List<Depot<ITransport>>();
             this.pictureWidth = pictureWidth;
-            this.pictureHeight = pictureHeight;
+            this.pictureHeight = pictureHeight;
+
             for (int i = 0; i < countStages; ++i)
             {
                 parkingStages.Add(new Depot<ITransport>(countPlaces, pictureWidth,
@@ -131,4 +134,5 @@ pictureWidth, pictureHeight));
         }
 
     }
-}
+}
+
