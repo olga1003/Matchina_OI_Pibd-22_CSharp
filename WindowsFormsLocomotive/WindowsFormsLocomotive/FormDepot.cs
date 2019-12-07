@@ -113,11 +113,18 @@ namespace WindowsFormsLocomotive
                    MessageBoxIcon.Error);
                     logger.Error("Переполнение");
                 }
+                catch (ParkingAlreadyHaveException ex)
+                {
+                    MessageBox.Show(ex.Message, "Дублирование", MessageBoxButtons.OK,
+ MessageBoxIcon.Error);
+                    logger.Error("Дублирование");
+                }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Неизвестная ошибка",
                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }           
+                    logger.Error("Неизвестная ошибка");
+                }
             }
         }
 
@@ -164,6 +171,13 @@ namespace WindowsFormsLocomotive
                 }
                 Draw();
             }
+        }
+
+        private void ButtonSort_Click(object sender, EventArgs e)
+        {
+            depot.Sort();
+            Draw();
+            logger.Info("Сортировка уровней");
         }
     }
 }
