@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsLocomotive
 {
-    class LocoTrain : Train, IComparable<LocoTrain>, IEquatable<LocoTrain>
+    class LocoTrain : Train, IComparable<LocoTrain>, IEquatable<LocoTrain>
     {
         protected const int locoWidth = 100;
         protected const int locoHeight = 60;
@@ -17,7 +17,6 @@ namespace WindowsFormsLocomotive
             Weight = weight;
             MainColor = mainColor;
         }
-
         public LocoTrain(string info)
         {
             string[] strs = info.Split(';');
@@ -27,7 +26,7 @@ namespace WindowsFormsLocomotive
                 Weight = Convert.ToInt32(strs[1]);
                 MainColor = Color.FromName(strs[2]);
             }
-        }
+        }
         public override void MoveTransport(Direction direction)
         {
             float step = MaxSpeed * 100 / Weight;
@@ -141,6 +140,6 @@ namespace WindowsFormsLocomotive
         }        public override int GetHashCode()
         {
             return base.GetHashCode();
-        }
+        }
     }
 }
