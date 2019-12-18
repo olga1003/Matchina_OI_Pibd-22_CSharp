@@ -8,7 +8,6 @@ namespace WindowsFormsLocomotive
 {
     public class ParkingNotFoundException : Exception
     {
-        public ParkingNotFoundException(int i) : base("Не найден поезд по месту "
-       + i)
+        public ParkingNotFoundException(int i) : base("Не найден поезд по месту " + i)
         { }
     }}
