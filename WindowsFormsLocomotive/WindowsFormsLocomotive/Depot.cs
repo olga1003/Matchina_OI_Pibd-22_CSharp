@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections;
 using System.Drawing;
+using System.Linq;
 namespace WindowsFormsLocomotive
 {
-    public class Depot<T> where T : class, ITransport
+    public class Depot<T> : IEnumerator<T>, IEnumerable<T>, IComparable<Depot<T>>
+      where T : class, ITransport
     {
 
         private Dictionary<int, T> _places;
@@ -15,6 +15,14 @@ namespace WindowsFormsLocomotive
         private int PictureHeight { get; set; }
         private const int _placeSizeWidth = 120;
         private const int _placeSizeHeight = 80;
+        private int _currentIndex;
+        public int GetKey
+        {
+            get
+            {
+                return _places.Keys.ToList()[_currentIndex];
+            }
+        }
         public Depot(int sizes, int pictureWidth, int pictureHeight)
         {
             _maxCount = sizes;
@@ -27,6 +35,10 @@ namespace WindowsFormsLocomotive
             if (p._places.Count == p._maxCount)
             {
                 throw new ParkingOverflowException();
+            }
+            if (p._places.ContainsValue(car))
+            {
+                throw new ParkingAlreadyHaveException();
             }
             for (int i = 0; i < p._maxCount; i++)
             {
@@ -105,6 +117,88 @@ namespace WindowsFormsLocomotive
                     throw new ParkingOccupiedPlaceException(ind);
                 }
             }
+        }
+        public T Current
+        {
+            get
+            {
+                return _places[_places.Keys.ToList()[_currentIndex]];
+            }
+        }
+        object IEnumerator.Current
+        {
+            get
+            {
+                return Current;
+            }
+        }
+        public void Dispose()
+        {
+
+        }
+        public bool MoveNext()
+        {
+            if (_currentIndex + 1 >= _places.Count)
+            {
+                Reset();
+                return false;
+            }
+            _currentIndex++;
+            return true;
+        }
+        public void Reset()
+        {
+            _currentIndex = -1;
+        }
+        public IEnumerator<T> GetEnumerator()
+        {
+            return this;
+        }
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+        public int CompareTo(Depot<T> other)
+        {
+            if (_places.Count > other._places.Count)
+            {
+                return -1;
+            }
+            else if (_places.Count < other._places.Count)
+            {
+                return 1;
+            }
+            else if (_places.Count > 0)
+            {
+                var thisKeys = _places.Keys.ToList();
+                var otherKeys = other._places.Keys.ToList();
+                for (int i = 0; i < _places.Count; ++i)
+                {
+                    if (_places[thisKeys[i]] is LocoTrain && other._places[thisKeys[i]] is
+                   TrainLocomotive)
+                    {
+                        return 1;
+                    }
+                    if (_places[thisKeys[i]] is TrainLocomotive && other._places[thisKeys[i]]
+                    is LocoTrain)
+                    {
+                        return -1;
+                    }
+                    if (_places[thisKeys[i]] is LocoTrain && other._places[thisKeys[i]] is
+                    LocoTrain)
+                    {
+                        return (_places[thisKeys[i]] is
+                       LocoTrain).CompareTo(other._places[thisKeys[i]] is LocoTrain);
+                    }
+                    if (_places[thisKeys[i]] is TrainLocomotive && other._places[thisKeys[i]]
+                    is TrainLocomotive)
+                    {
+                        return (_places[thisKeys[i]] is
+                       TrainLocomotive).CompareTo(other._places[thisKeys[i]] is TrainLocomotive);
+                    }
+                }
+            }
+            return 0;
         }
 
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsLocomotive
 {
-    class LocoTrain : Train
+    class LocoTrain : Train, IComparable<LocoTrain>, IEquatable<LocoTrain>
     {
         protected const int locoWidth = 100;
         protected const int locoHeight = 60;
@@ -17,7 +17,6 @@ namespace WindowsFormsLocomotive
             Weight = weight;
             MainColor = mainColor;
         }
-
         public LocoTrain(string info)
         {
             string[] strs = info.Split(';');
@@ -27,7 +26,7 @@ namespace WindowsFormsLocomotive
                 Weight = Convert.ToInt32(strs[1]);
                 MainColor = Color.FromName(strs[2]);
             }
-        }
+        }
         public override void MoveTransport(Direction direction)
         {
             float step = MaxSpeed * 100 / Weight;
@@ -78,10 +77,72 @@ namespace WindowsFormsLocomotive
             g.FillEllipse(gr, _startPosX + 48, _startPosY + 50, 15, 15);
             g.FillEllipse(gr, _startPosX + 68, _startPosY + 50, 15, 15);
         }
-
         public override string ToString()
         {
             return MaxSpeed + ";" + Weight + ";" + MainColor.Name;
+        }
+        public int CompareTo(LocoTrain other)
+        {
+            if (other == null)
+            {
+                return 1;
+            }
+            if (MaxSpeed != other.MaxSpeed)
+            {
+                return MaxSpeed.CompareTo(other.MaxSpeed);
+            }
+            if (Weight != other.Weight)
+            {
+                return Weight.CompareTo(other.Weight);
+            }
+            if (MainColor != other.MainColor)
+            {
+                MainColor.Name.CompareTo(other.MainColor.Name);
+            }
+            return 0;
+        }
+        public bool Equals(LocoTrain other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+            if (GetType().Name != other.GetType().Name)
+            {
+                return false;
+            }
+            if (MaxSpeed != other.MaxSpeed)
+            {
+                return false;
+            }
+            if (Weight != other.Weight)
+            {
+                return false;
+            }
+            if (MainColor != other.MainColor)
+            {
+                return false;
+            }
+            return true;
+        }
+        public override bool Equals(Object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            if (!(obj is LocoTrain carObj))
+            {
+                return false;
+            }
+            else
+            {
+                return Equals(carObj);
+            }
+        }
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }

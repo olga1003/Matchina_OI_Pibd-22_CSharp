@@ -73,7 +73,7 @@ namespace WindowsFormsLocomotive
                         Bitmap bmp = new Bitmap(pictureBoxTakeTrain.Width,
                            pictureBoxTakeTrain.Height);
                         pictureBoxTakeTrain.Image = bmp;
-                        logger.Error("На месте " + maskedTextBox.Text+" нет поезда");
+                        logger.Error("На месте " + maskedTextBox.Text + " нет поезда");
                     }
                     catch (Exception ex)
                     {
@@ -83,7 +83,7 @@ namespace WindowsFormsLocomotive
                 }
             }
         }
-        
+
         private void ListBoxLevels_SelectedIndexChanged(object sender, EventArgs e)
         {
             Draw();
@@ -104,7 +104,7 @@ namespace WindowsFormsLocomotive
                 {
 
                     int place = depot[listBoxLevels.SelectedIndex] + transport;
-                    logger.Info("Добавлен поезд " + transport.ToString() + " на место " + place);
+                    logger.Info("Добавлен поезд " + transport.ToString() + " на место " + place);
                     Draw();
                 }
                 catch (ParkingOverflowException ex)
@@ -113,11 +113,18 @@ namespace WindowsFormsLocomotive
                    MessageBoxIcon.Error);
                     logger.Error("Переполнение");
                 }
+                catch (ParkingAlreadyHaveException ex)
+                {
+                    MessageBox.Show(ex.Message, "Дублирование", MessageBoxButtons.OK,
+ MessageBoxIcon.Error);
+                    logger.Error("Дублирование");
+                }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Неизвестная ошибка",
                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }           
+                    logger.Error("Неизвестная ошибка");
+                }
             }
         }
 
@@ -157,13 +164,20 @@ namespace WindowsFormsLocomotive
                     MessageBox.Show(ex.Message, "Занятое место", MessageBoxButtons.OK,
                    MessageBoxIcon.Error);
                     logger.Error("Занятое место");
-                }                catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении",
                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 Draw();
             }
+        }
+        private void ButtonSort_Click_1(object sender, EventArgs e)
+        {
+            depot.Sort();
+            Draw();
+            logger.Info("Сортировка уровней");
         }
     }
 }

@@ -42,6 +42,7 @@
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.buttonSetTrain = new System.Windows.Forms.Button();
+            this.buttonSort = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDepot)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTakeTrain)).BeginInit();
@@ -172,11 +173,23 @@
             this.buttonSetTrain.UseVisualStyleBackColor = true;
             this.buttonSetTrain.Click += new System.EventHandler(this.ButtonSetTrain_Click_1);
             // 
+            // buttonSort
+            // 
+            this.buttonSort.Location = new System.Drawing.Point(710, 464);
+            this.buttonSort.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonSort.Name = "buttonSort";
+            this.buttonSort.Size = new System.Drawing.Size(88, 25);
+            this.buttonSort.TabIndex = 9;
+            this.buttonSort.Text = "Cортировка";
+            this.buttonSort.UseVisualStyleBackColor = true;
+            this.buttonSort.Click += new System.EventHandler(this.ButtonSort_Click_1);
+            // 
             // FormDepot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(852, 579);
+            this.Controls.Add(this.buttonSort);
             this.Controls.Add(this.buttonSetTrain);
             this.Controls.Add(this.listBoxLevels);
             this.Controls.Add(this.groupBox1);
@@ -212,5 +225,6 @@
         private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem загрузитьToolStripMenuItem;
         private System.Windows.Forms.Button buttonSetTrain;
+        private System.Windows.Forms.Button buttonSort;
     }
 }

@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace WindowsFormsLocomotive
 {
-    class TrainLocomotive : LocoTrain
+    class TrainLocomotive : LocoTrain, IComparable<TrainLocomotive>, IEquatable<TrainLocomotive>
     {
         public Color DopColor { private set; get; }
         public bool Steam { private set; get; }
@@ -68,6 +68,79 @@ bool steam, bool coal, bool pipe) :
         {
             return base.ToString() + ";" + DopColor.Name + ";" + Coal + ";" +
            Steam;
-        }
+        }
+        public int CompareTo(TrainLocomotive other)
+        {
+            var res = (this is LocoTrain).CompareTo(other is LocoTrain);
+            if (res != 0)
+            {
+                return res;
+            }
+            if (DopColor != other.DopColor)
+            {
+                DopColor.Name.CompareTo(other.DopColor.Name);
+            }
+            if (Coal != other.Coal)
+            {
+                return Coal.CompareTo(other.Coal);
+            }
+            if (Steam != other.Steam)
+            {
+                return Steam.CompareTo(other.Steam);
+            }
+            if (Pipe != other.Pipe)
+            {
+                return Pipe.CompareTo(other.Pipe);
+            }
+            return 0;
+        }
+        public bool Equals(TrainLocomotive other)
+        {
+            var res = (this as LocoTrain).Equals(other as LocoTrain);
+            if (!res)
+            {
+                return res;
+            }
+            if (GetType().Name != other.GetType().Name)
+            {
+                return false;
+            }
+            if (DopColor != other.DopColor)
+            {
+                return false;
+            }
+            if (Coal != other.Coal)
+            {
+                return false;
+            }
+            if (Steam != other.Steam)
+            {
+                return false;
+            }
+            if (Pipe != other.Pipe)
+            {
+                return false;
+            }
+            return true;
+        }
+        public override bool Equals(Object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            if (!(obj is TrainLocomotive carObj))
+            {
+                return false;
+            }
+            else
+            {
+                return Equals(carObj);
+            }
+        }
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }
