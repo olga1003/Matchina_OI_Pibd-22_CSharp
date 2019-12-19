@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-
-
 namespace WindowsFormsLocomotive
 {
     class MultiLevelParking
@@ -24,8 +22,6 @@ namespace WindowsFormsLocomotive
                pictureHeight));
             }
         }
-
-
         public Depot<ITransport> this[int ind]
         {
             get
@@ -132,7 +128,5 @@ pictureWidth, pictureHeight));
                 }
             }
         }
-
     }
 }
-
