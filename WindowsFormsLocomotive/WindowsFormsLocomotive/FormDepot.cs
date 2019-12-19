@@ -50,8 +50,6 @@ namespace WindowsFormsLocomotive
                 {
                     try
                     {
-
-
                         var locomotive = depot[listBoxLevels.SelectedIndex] -
                    Convert.ToInt32(maskedTextBox.Text);
 
@@ -102,9 +100,9 @@ namespace WindowsFormsLocomotive
             {
                 try
                 {
-
                     int place = depot[listBoxLevels.SelectedIndex] + transport;
-                    logger.Info("Добавлен поезд " + transport.ToString() + " на место " + place);
+                    logger.Info("Добавлен поезд " + transport.ToString() + " на место " + place);
+
                     Draw();
                 }
                 catch (ParkingOverflowException ex)
@@ -164,7 +162,8 @@ namespace WindowsFormsLocomotive
                     MessageBox.Show(ex.Message, "Занятое место", MessageBoxButtons.OK,
                    MessageBoxIcon.Error);
                     logger.Error("Занятое место");
-                }                catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении",
                    MessageBoxButtons.OK, MessageBoxIcon.Error);
