@@ -8,19 +8,20 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NLog;
 
 namespace WindowsFormsLocomotive
 {
     public partial class FormDepot : Form
     {
         MultiLevelParking depot;
-
         FormTrainConfig form;
-
         private const int countLevel = 5;
+        private Logger logger;
         public FormDepot()
         {
             InitializeComponent();
+            logger = LogManager.GetCurrentClassLogger();
             depot = new MultiLevelParking(countLevel, pictureBoxDepot.Width,
            pictureBoxDepot.Height);
             for (int i = 0; i < countLevel; i++)
@@ -47,10 +48,11 @@ namespace WindowsFormsLocomotive
             {
                 if (maskedTextBox.Text != "")
                 {
-                    var locomotive = depot[listBoxLevels.SelectedIndex] -
-                   Convert.ToInt32(maskedTextBox.Text);
-                    if (locomotive != null)
+                    try
                     {
+                        var locomotive = depot[listBoxLevels.SelectedIndex] -
+                   Convert.ToInt32(maskedTextBox.Text);
+
                         Bitmap bmp = new Bitmap(pictureBoxTakeTrain.Width,
                        pictureBoxTakeTrain.Height);
                         Graphics gr = Graphics.FromImage(bmp);
@@ -58,17 +60,28 @@ namespace WindowsFormsLocomotive
                        pictureBoxTakeTrain.Height);
                         locomotive.DrawTrain(gr);
                         pictureBoxTakeTrain.Image = bmp;
+                        logger.Info("Изъят поезд " + locomotive.ToString() + " с места " + maskedTextBox.Text);
+                        Draw();
+
                     }
-                    else
+                    catch (ParkingNotFoundException ex)
                     {
+                        MessageBox.Show(ex.Message, "Не найдено", MessageBoxButtons.OK,
+                       MessageBoxIcon.Error);
                         Bitmap bmp = new Bitmap(pictureBoxTakeTrain.Width,
-                       pictureBoxTakeTrain.Height);
+                           pictureBoxTakeTrain.Height);
                         pictureBoxTakeTrain.Image = bmp;
+                        logger.Error("На месте " + maskedTextBox.Text+" нет поезда");
                     }
-                    Draw();
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Неизвестная ошибка",
+                       MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }
+        
         private void ListBoxLevels_SelectedIndexChanged(object sender, EventArgs e)
         {
             Draw();
@@ -85,15 +98,24 @@ namespace WindowsFormsLocomotive
         {
             if (transport != null && listBoxLevels.SelectedIndex > -1)
             {
-                int place = depot[listBoxLevels.SelectedIndex] + transport;
-                if (place > -1)
+                try
                 {
+                    int place = depot[listBoxLevels.SelectedIndex] + transport;
+                    logger.Info("Добавлен поезд " + transport.ToString() + " на место " + place);
+
                     Draw();
                 }
-                else
+                catch (ParkingOverflowException ex)
                 {
-                    MessageBox.Show("Поезд не удалось поставить");
+                    MessageBox.Show(ex.Message, "Переполнение", MessageBoxButtons.OK,
+                   MessageBoxIcon.Error);
+                    logger.Error("Переполнение");
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка",
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }           
             }
         }
 
@@ -101,14 +123,16 @@ namespace WindowsFormsLocomotive
         {
             if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                if (depot.SaveData(saveFileDialog.FileName))
+                try
                 {
+                    depot.SaveData(saveFileDialog.FileName);
                     MessageBox.Show("Сохранение прошло успешно", "Результат",
-                   MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    logger.Info("Сохранено в файл " + saveFileDialog.FileName);
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Не сохранилось", "Результат",
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении",
                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -118,15 +142,24 @@ namespace WindowsFormsLocomotive
         {
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                if (depot.LoadData(openFileDialog.FileName))
+                try
                 {
+                    depot.LoadData(openFileDialog.FileName);
                     MessageBox.Show("Загрузили", "Результат", MessageBoxButtons.OK,
-     MessageBoxIcon.Information);
+    MessageBoxIcon.Information);
+                    logger.Info("Загружено из файла " + openFileDialog.FileName);
+
                 }
-                else
+                catch (ParkingOccupiedPlaceException ex)
                 {
-                    MessageBox.Show("Не загрузили", "Результат", MessageBoxButtons.OK,
+                    MessageBox.Show(ex.Message, "Занятое место", MessageBoxButtons.OK,
                    MessageBoxIcon.Error);
+                    logger.Error("Занятое место");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении",
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 Draw();
             }

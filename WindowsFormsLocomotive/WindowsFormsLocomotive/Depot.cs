@@ -26,7 +26,7 @@ namespace WindowsFormsLocomotive
         {
             if (p._places.Count == p._maxCount)
             {
-                return -1;
+                throw new ParkingOverflowException();
             }
             for (int i = 0; i < p._maxCount; i++)
             {
@@ -49,12 +49,12 @@ namespace WindowsFormsLocomotive
                 p._places.Remove(index);
                 return car;
             }
-            return null;
+            throw new ParkingNotFoundException(index);
         }
         private bool CheckFreePlace(int index)
         {
             return !_places.ContainsKey(index);
-        }
+        }
         public void Draw(Graphics g)
         {
             DrawMarking(g);
@@ -67,7 +67,7 @@ namespace WindowsFormsLocomotive
         private void DrawMarking(Graphics g)
         {
             Pen pen = new Pen(Color.Black, 3);
-            g.DrawRectangle(pen, 0, 0, (_maxCount / 5) * _placeSizeWidth, 320);
+            g.DrawRectangle(pen, 0, 0, (_maxCount / 5) * _placeSizeWidth, 420);
             for (int i = 0; i < _maxCount / 5; i++)
             {
                 for (int j = 0; j < 6; ++j)
@@ -90,7 +90,7 @@ namespace WindowsFormsLocomotive
                 {
                     return _places[ind];
                 }
-                return null;
+                throw new ParkingNotFoundException(ind);
             }
             set
             {
@@ -99,6 +99,10 @@ namespace WindowsFormsLocomotive
                     _places.Add(ind, value);
                     _places[ind].SetPosition(5 + ind / 5 * _placeSizeWidth + 5, ind % 5
                     * _placeSizeHeight + 15, PictureWidth, PictureHeight);
+                }
+                else
+                {
+                    throw new ParkingOccupiedPlaceException(ind);
                 }
             }
         }
