@@ -2,13 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
+using System.Linq;
+
 namespace WindowsFormsLocomotive
 {
     public class Depot<T> : IEnumerator<T>, IEnumerable<T>, IComparable<Depot<T>>
   where T : class, ITransport
     {
-
         private Dictionary<int, T> _places;
         private int _maxCount;
         private int PictureWidth { get; set; }
@@ -39,7 +39,8 @@ namespace WindowsFormsLocomotive
             if (p._places.ContainsValue(car))
             {
                 throw new ParkingAlreadyHaveException();
-            }
+            }
+
             for (int i = 0; i < p._maxCount; i++)
             {
                 if (p.CheckFreePlace(i))
@@ -61,12 +62,14 @@ namespace WindowsFormsLocomotive
                 p._places.Remove(index);
                 return car;
             }
-            throw new ParkingNotFoundException(index);
+            throw new ParkingNotFoundException(index);
+
         }
         private bool CheckFreePlace(int index)
         {
             return !_places.ContainsKey(index);
-        }
+        }
+
         public void Draw(Graphics g)
         {
             DrawMarking(g);
@@ -145,10 +148,12 @@ namespace WindowsFormsLocomotive
             }
             _currentIndex++;
             return true;
-        }        public void Reset()
+        }
+        public void Reset()
         {
             _currentIndex = -1;
-        }        public IEnumerator<T> GetEnumerator()
+        }
+        public IEnumerator<T> GetEnumerator()
         {
             return this;
         }
@@ -197,6 +202,7 @@ namespace WindowsFormsLocomotive
                 }
             }
             return 0;
-        }
+        }
+
     }
 }
