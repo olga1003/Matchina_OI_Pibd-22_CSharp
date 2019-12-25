@@ -42,6 +42,7 @@
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.buttonSetTrain = new System.Windows.Forms.Button();
+            this.buttonSort = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDepot)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTakeTrain)).BeginInit();
@@ -63,7 +64,7 @@
             this.groupBox1.Controls.Add(this.pictureBoxTakeTrain);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.buttonTakeTrain);
-            this.groupBox1.Location = new System.Drawing.Point(675, 238);
+            this.groupBox1.Location = new System.Drawing.Point(675, 306);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -172,11 +173,22 @@
             this.buttonSetTrain.UseVisualStyleBackColor = true;
             this.buttonSetTrain.Click += new System.EventHandler(this.ButtonSetTrain_Click_1);
             // 
+            // buttonSort
+            // 
+            this.buttonSort.Location = new System.Drawing.Point(680, 228);
+            this.buttonSort.Name = "buttonSort";
+            this.buttonSort.Size = new System.Drawing.Size(139, 38);
+            this.buttonSort.TabIndex = 9;
+            this.buttonSort.Text = "Сортировать";
+            this.buttonSort.UseVisualStyleBackColor = true;
+            this.buttonSort.Click += new System.EventHandler(this.ButtonSort_Click);
+            // 
             // FormDepot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(852, 579);
+            this.Controls.Add(this.buttonSort);
             this.Controls.Add(this.buttonSetTrain);
             this.Controls.Add(this.listBoxLevels);
             this.Controls.Add(this.groupBox1);
@@ -212,5 +224,6 @@
         private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem загрузитьToolStripMenuItem;
         private System.Windows.Forms.Button buttonSetTrain;
+        private System.Windows.Forms.Button buttonSort;
     }
 }

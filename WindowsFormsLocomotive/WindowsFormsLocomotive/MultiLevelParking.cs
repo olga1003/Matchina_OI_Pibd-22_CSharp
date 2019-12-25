@@ -33,7 +33,7 @@ namespace WindowsFormsLocomotive
                 return null;
             }
         }
-        public void SaveData(string filename)
+         public void SaveData(string filename)
         {
             if (File.Exists(filename))
             {
@@ -47,28 +47,24 @@ namespace WindowsFormsLocomotive
                 {
                     //Начинаем уровень
                     fs.WriteLine("Level");
-                    for (int i = 0; i < countPlaces; i++)
+                    foreach (ITransport train in level)
                     {
-                        try
+                        //Записываем тип мшаины
+                        if (train.GetType().Name == "LocoTrain")
                         {
-                            var car = level[i];
-                            //Записываем тип мшаины
-                            if (car.GetType().Name == "LocoTrain")
-                            {
-                                fs.Write(i + ":LocoTrain:");
-                            }
-                            if (car.GetType().Name == "TrainLocomotive")
-                            {
-                                fs.Write(i + ":TrainLocomotive:");
-                            }
-                            //Записываемые параметры
-                            fs.WriteLine(car);
+                            fs.WriteLine(level.GetKey + ":LocoTrain:");
                         }
-                        finally { }
+                        if (train.GetType().Name == "TrainLocomotive")
+                        {
+                            fs.WriteLine(level.GetKey + ":TrainLocomotive:");
+                        }
+                        //Записываемые параметры
+                        fs.WriteLine(train);
                     }
                 }
             }
         }
+
         public void LoadData(string filename)
         {
             if (!File.Exists(filename))
@@ -128,5 +124,10 @@ pictureWidth, pictureHeight));
                 }
             }
         }
+        public void Sort()
+        {
+            parkingStages.Sort();
+        }
     }
 }
+
